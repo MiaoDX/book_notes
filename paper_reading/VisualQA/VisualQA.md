@@ -208,8 +208,23 @@ So, there is VisualQA v2.0,
 
 VQA distribution of answers per question type of VisualQA v2.0
 
+***
+## Visual7W
 
+Paper: [Visual7W: Grounded Question Answering in Images](https://arxiv.org/abs/1511.03416)
 
+We establish a semantic link between textual descriptions and image regions by object-level grounding.
+
+![Visual7W example](pics/viusal7w_eg.png){width=70%}
+
+7W:
+
+* Telling questions:
+    - what, where, when, who, why, how
+    - Multi-choice
+
+* Pointing questions:
+    - which
 
 # Baseline and state-of-the art methods
 
