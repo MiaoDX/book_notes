@@ -12,9 +12,13 @@
 * pose regress(-ion)
 * pose relocalization
 
+. . .
+
 Given images, try to get their relative/absolute pose
 
 -> potentially relocate the agent.
+
+. . .
 
 Most people are doing the `estimation` work, in large scale:
 
@@ -31,10 +35,12 @@ Most people are doing the `estimation` work, in large scale:
     - place recognition: landmarks
     - metric localisation: feature-based mostly
 
-NOTE: we will not distinguish `classical` and `feature-based` methods from now on.
+. . .
+
+NOTE:<br> won't distinguish `classical` and `feature-based` below
 
 * Learning based
-    - it is getting more and more attention these days
+    - it is getting more and more attention recently
 
 
 ***
@@ -42,13 +48,20 @@ NOTE: we will not distinguish `classical` and `feature-based` methods from now o
 
 Why we need learning when we already have classical methods (feature-based), which are still `state-of-the-art`?
 
-> If all you have is a hammer, everything looks like a nail -- Maslow's hammer
+. . .
+
+> If all you have is a hammer, everything looks like a nail <br>-- Maslow's hammer
+
+. . .
 
 "These methods require a **3D model** with a **large database** of features and **efficient retrieval** methods. They are **expensive** to compute, often do **not scale** well, and are often **not robust** to changing environmental conditions"
 
---- Geometric loss functions for camera pose regression with deep learning
+-- 『Geometric loss functions for camera pose regression with deep learning』
 
-In contrast, the learning based methods **can be** much more **smaller**, and much more **quicker**. And there is a considerable gap between these two methods, leaving place for the academic world.
+. . .
+
+In contrast, the learning based methods **can be** much more **smaller**, and much more **quicker**. <br>
+And there is a considerable gap between these two methods, leaving place for the academic world.
 
 
 
@@ -57,19 +70,18 @@ In contrast, the learning based methods **can be** much more **smaller**, and mu
 
 " For comparison matching to the convnet nearest neighbour is also shown. This requires storing feature vectors for each training frame, then perform a linear search to find the nearest neighbour for a given test frame."
 
--- PoseNet: A Convolutional Network for Real-Time 6-DOF Camera Relocalization
+-- 『PoseNet: A Convolutional Network for Real-Time 6-DOF Camera Relocalization』
 
-# Some papers
+# PoseNet
 
 ***
 PoseNet: A Convolutional Network for Real-Time 6-DOF Camera Relocalization
 
 ```
-@inproceedings{kendall2015posenet,
-  title={Posenet: A convolutional network for real-time 6-dof camera relocalization},
+@article{kendall2015convolutional,
+  title={PoseNet: A Convolutional Network for Real-Time 6-DOF Camera Relocalization},
   author={Kendall, Alex and Grimes, Matthew and Cipolla, Roberto},
-  booktitle={Proceedings of the IEEE international conference on computer vision},
-  pages={2938--2946},
+  booktitle = {Proceedings of the International Conference on Computer Vision ({ICCV})},
   year={2015}
 }
 ```
@@ -84,11 +96,11 @@ PoseNet: A Convolutional Network for Real-Time 6-DOF Camera Relocalization
     - $q$: quaternion $q$ for $R$, for easy training; re-normalize and covert back to $R$ when testing
 * consider $q$, $t$ separately, $\beta$ counts for the scale difference
     
-    ![loss function in PoseNet (1.0)](pics/loss_f_posenet_1.png){#fig:loss_f width=75%}
+    ![loss function in PoseNet (1.0)](pics/loss_f_posenet_1.png){#fig:loss_f width=50%}
 
 ***
 
-![loss function in PoseNet (1.0)](pics/loss_f_posenet_1.png){#fig:loss_f width=75%}
+![loss function in PoseNet (1.0)](pics/loss_f_posenet_1.png){#fig:loss_f width=50%}
 
 Note on $q$ and the `re-normalize` mentioned before:
 
@@ -99,15 +111,19 @@ Note on $q$ and the `re-normalize` mentioned before:
 
 
 ***
-![loss function in PoseNet (1.0)](pics/loss_f_posenet_1.png){#fig:loss_f width=75%}
+![loss function in PoseNet (1.0)](pics/loss_f_posenet_1.png){#fig:loss_f width=50%}
 
 Note on $\beta$:
 
 Combine the $x$ and $q$ together with $\beta$, since they are related to each other intuitively, and latter experiments trained separately showed bad results.
 
-" We found $\beta$ to be greater for outdoor scenes as position errors tended to be relatively greater. <br> Following this intuition we fine tuned $\beta$ using grid search. <br> For the indoor scenes it was between 120 to 750 and outdoor scenes between 250 to 2000."
+. . .
 
-Intuitively, it will benefit if we consider some geometric information. (Which is true, by the way)
+" We found $\beta$ to be greater for outdoor scenes as position errors tended to be relatively greater. Following this intuition we fine tuned $\beta$ using grid search. For the indoor scenes it was between 120 to 750 and outdoor scenes between 250 to 2000."
+
+. . .
+
+Intuitively, it will benefit if we consider some geometric information. 
 
 ***
 ## Implementation
@@ -116,7 +132,10 @@ Intuitively, it will benefit if we consider some geometric information. (Which i
 ***
 ![GoogLeNet, the basis for the proposed method](pics/googlenet_horizon.png){#fig:googlenet width=95%}
 
+***
 GoogLeNet: 22-layer CNN with six *inception modules* and two additional intermediate classifiers which are discarded at test time. (not so familiar here)
+
+. . .
 
 Proposed modified version:
 
@@ -124,24 +143,28 @@ Proposed modified version:
 * Insert FC before the final regressor of feature size 2048. This was to form a **localization feature vector** which **may** then be explored for generalisation
 * Normallize $q$ when testing
 
-Image -> rescaled with smallest dimension=256 -> crop to 224*224.
+. . .
 
-Train on random crop, test with center crop and 128 uniformly spaced crops (not so sure whether it is the original image or not) and average. 5ms->95ms.
+Image -> rescaled with smallest dimension=256 -> crop to 224*224 -> NETWORK
+
+Train on random crop, test with center crop and 128 uniformly spaced crops, then average. 5ms->95ms.
 
 ***
 ## Dataset & evaluation
 
-![Dataset the PoseNet aiming at](pics/dataset_posenet.png){#fig:dataset width=75%}
+![Dataset the PoseNet used for experimenting](pics/dataset_posenet.png){#fig:dataset width=75%}
+
+. . .
 
 Use camera pose from SfM as GT (training labels).
 
 ***
 
-![Evaluation on dataset](pics/eval_posenet_1.png){#fig:eval_1 width=75%}
+![Evaluation on dataset](pics/eval_posenet_1.png){#fig:eval_1 width=90%}
 
 ***
 
-![Evaluation on dataset](pics/eval_posenet_2.png){#fig:eval_2 width=75%}
+![Evaluation on dataset](pics/eval_posenet_2.png){#fig:eval_2 width=90%}
 
 The **competitive** is somewhat controversial ..
 
@@ -149,7 +172,6 @@ The **competitive** is somewhat controversial ..
 ## The robustness of proposed method
 
 ***
-Robustness (1)
 ![Robustness to challenging real life situations(1)](pics/robustness_1.png){#fig:robust_1 width=75%}
 
 * motion blur
@@ -157,7 +179,6 @@ Robustness (1)
 
 
 ***
-Robustness (2)
 ![Robustness to challenging real life situations(2)](pics/robustness_2.png){#fig:robust_2 width=75%}
 
 
@@ -166,8 +187,7 @@ Robustness (2)
 * unknown camera intrinsics
 
 ***
-Robustness (3)
-![Robustness against training image spacing](pics/robustness_3.png){#fig:robust_spacing width=75%}
+![](pics/robustness_3.png){#fig:robust_spacing width=75%}
 
 Robustness against training image spacing
 
@@ -188,22 +208,25 @@ Robustness against training image spacing
 
 ![](pics/visualizing_1.png){#fig:feature_visualing width=75%}
 
-" The saliency map, is the **magnitude** of the **gradient of the loss function** with respect to the pixel **intensities**. <br> This uses the sensitivity of the pose with respect to the pixels as an indicator of how important the convnet considers different parts of the image."
+" The saliency map, is the **magnitude** of the **gradient of the loss function** with respect to the pixel **intensities**. This uses the sensitivity of the pose with respect to the pixels as an indicator of how important the convnet considers different parts of the image."
 
-* strongest response is observed from **higher-level** features such as windows and
-spires. 
-* a more surprising result is that PoseNet is also very sensitive to **large textureless patches** such as road, grass and sky.
+***
+![](pics/visualizing_1.png){#fig:feature_visualing width=75%}
+
+* strongest response is observed from **higher-level** features such as windows and spires
+* a more surprising result is that PoseNet is also very sensitive to **large textureless patches** such as road, grass and sky
     - which, by the way, will fail feature-based methods
 * has an attenuated (使减弱) response to people and other noisy objects, effectively masking them
 
 ***
 ## Viewing the internal representation
 
-![](pics/visualizing_2.png){#fig:vector_visualizing width=75%}
+![](pics/visualizing_2.png){#fig:vector_visualizing width=50%}
 
 apply t-SNE to the feature vectors computed from a sequence of video frames taken by a pedestrian.
 
-As these figures show:
+***
+![](pics/visualizing_2.png){#fig:vector_visualizing width=25%}
 
 * the feature vectors are a function that smoothly varies with, and is largely one-to-one with, pose.
     - **pose mainfold**
@@ -219,6 +242,8 @@ As these figures show:
 * sidestep the need for millions of training images by use of transfer learning from networks trained as classifiers
     - such networks (classifiers) preserve ample pose information in their feature vectors, despite being trained to produce pose-invariant outputs
 
+. . .
+
 In the future:
 
 * geometric information
@@ -226,7 +251,40 @@ In the future:
 
 
 ***
-![The poster of the author](pics/posenet_poster.png){#fig:poster width=75%}
+![The poster of the author](pics/posenet_poster.png){#fig:poster width=90%}
+
+
+# Geometric loss + PoseNet
 
 ***
-{#fig: width=75%}
+Geometric loss functions for camera pose regression with deep learning
+
+```
+@article{kendall2017geometric,
+  title={Geometric loss functions for camera pose regression with deep learning},
+  author={Kendall, Alex and Cipolla, Roberto},
+  journal={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  year={2017}
+}
+```
+
+
+
+***
+
+[TODO]
+
+
+
+
+
+
+
+
+
+
+***
+
+That's all, thank you!
+
+> Good Luck & Have Fun.
