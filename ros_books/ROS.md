@@ -36,3 +36,20 @@ The `move` operation can only have x-y coordinate change, not the rotation one.
 rviz to check them, by including the laser_scan topic and verifying the rotation of the obtained data.
 
 The transformation is rather confusing.
+
+* 3.6.4 NAVIGATION
+
+holomic_robot, the definition and the examples.
+
+* 4.2 Multiple Machines Communication
+
+The multi computers communication can be useful.
+
+
+##
+
+... SKIPPED A LOT
+
+## A Distributed Calibration Algorithm for Color and Range Camera Networks
+
+`P. Furgale, J. Rehder, R. Siegwart, Unified temporal and spatial calibration for multi-sensor (IROS), 2013` ETH always have the attractive work -.-.
