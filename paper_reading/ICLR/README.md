@@ -8,7 +8,6 @@ Chosen paper reading candidates in ICLR2018. The principle is NICE TITLE + CODE 
 
 * [SYNTHESIZING ROBUST ADVERSARIAL EXAMPLES](https://openreview.net/pdf?id=BJDH5M-AW)
 	- [prabhant/synthesizing-robust-adversarial-examples](https://github.com/prabhant/synthesizing-robust-adversarial-examples)
-	- [cometyang/synthesizing-robust-adversarial-examples](https://github.com/cometyang/synthesizing-robust-adversarial-examples), they seems alike.
 
 
 
