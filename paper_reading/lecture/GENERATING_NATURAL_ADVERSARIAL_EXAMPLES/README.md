@@ -123,6 +123,10 @@ Both these search algorithms are **sample-based** and **applicable to black-box 
 * Generator consisting of transposed convolutional layers; critic consisting of convolutional layers; the inverter with fully connected layers on top of the critic’s last hidden layer
 * Classifier ($f$ in Figure 3): Random Forests and LeNet
 * $z \in \mathbb{R}^{64}$
+
+***
+![](pics/t1_mnist.png)
+
 * Our adversaries are quite similar to the original inputs in overall style and shape
 * compared to RF, LeNet requires more substantial changes to the inputs to be fooled -> **in other words**, RF is less robust than LeNet in classification
 
@@ -221,3 +225,9 @@ Given this strong correlation, we are confident that our framework for generatin
 * Not (so) suitable as augmentation data
 
 # Comment on Open Review
+
+[https://openreview.net/forum?id=H1BLjgZCb](https://openreview.net/forum?id=H1BLjgZCb)
+
+![](pics/or_1.png)
+
+![](pics/or_2.png)
