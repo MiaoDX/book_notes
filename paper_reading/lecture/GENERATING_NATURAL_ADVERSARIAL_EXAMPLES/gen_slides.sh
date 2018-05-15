@@ -1,1 +1,2 @@
-pandoc -f markdown -t revealjs --standalone --self-contained README.md -o README.html -V theme=serif2 -V revealjs-url=H:/class_material/hand_in_homework/pandoc_markdown_revealjs/reveal.js -i
+pandoc --toc --from=markdown --standalone --to=revealjs README.md -o README.html -V revealjs-url=H:/class_material/hand_in_homework/pandoc_markdown_revealjs/reveal.js -V theme=serif2 -i --mathjax="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full"
+# --self-contained

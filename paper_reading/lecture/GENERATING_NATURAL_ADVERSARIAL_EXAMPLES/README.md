@@ -35,7 +35,7 @@ Generated adversaries are natural, legible to humans, and useful in evaluating a
 
 ***
 
-![One adversarial example on MNIST](pics/f1_mnist_example.png)
+![One adversarial example on MNIST](pics/f1_mnist_example.png){width=75%}
 
 FGSM, Fast Gradient Sign Method
 
@@ -118,14 +118,14 @@ Both these search algorithms are **sample-based** and **applicable to black-box 
 ***
 ### MNIST
 
-![](pics/t1_mnist.png)
+![](pics/t1_mnist.png){width=75%}
 
 * Generator consisting of transposed convolutional layers; critic consisting of convolutional layers; the inverter with fully connected layers on top of the critic’s last hidden layer
 * Classifier ($f$ in Figure 3): Random Forests and LeNet
 * $z \in \mathbb{R}^{64}$
 
 ***
-![](pics/t1_mnist.png)
+![](pics/t1_mnist.png){width=75%}
 
 * Our adversaries are quite similar to the original inputs in overall style and shape
 * compared to RF, LeNet requires more substantial changes to the inputs to be fooled -> **in other words**, RF is less robust than LeNet in classification
@@ -157,7 +157,7 @@ Both these search algorithms are **sample-based** and **applicable to black-box 
 ***
 ### Textural Entailment
 
-![](pics/t3_te.png)
+![](pics/t3_te.png){width=75%}
 
 Evaluate common-sense reasoning for language.
 
@@ -195,7 +195,7 @@ For both the tasks, we observe that more accurate classifiers require larger cha
 
 *** 
 
-![](pics/f4_delta_z.png)
+![](pics/f4_delta_z.png){width=75%}
 
 Study the effect of changing hyper-parameters of models on the results (focusing on MNIST).
 
