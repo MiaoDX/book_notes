@@ -1,6 +1,6 @@
 % Generating Natural Adversarial Examples
-% MiaoDX <br> mioadx@tju.edu.cn
-% May, 2018
+% Authors: Zhengli Zhao, Dheeru Dua, Sameer Singh
+% Lecturer: MiaoDX miaodx@tju.edu.cn <br> May, 2018
 
 # What & Why
 
